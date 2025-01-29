@@ -1,7 +1,5 @@
 import folium
-import json
 from django.shortcuts import get_object_or_404
-from django.http import HttpResponseNotFound
 from django.shortcuts import render
 from .models import Pokemon, PokemonEntity
 from django.utils.timezone import localtime
@@ -69,14 +67,14 @@ def show_pokemon(request, pokemon_id):
     pokemon = get_object_or_404(Pokemon, id=pokemon_id)
 
     img_url = request.build_absolute_uri(pokemon.image.url) if pokemon.image else ""
-    
+
     pokemon_page = {
         "pokemon_id": pokemon.id,
         "title_ru": pokemon.title_ru,
         "title_en": pokemon.title_en,
         "title_jp": pokemon.title_jp,
         "img_url": img_url,
-        "description": pokemon.description
+        "description": pokemon.description,
     }
 
     if pokemon.previous_evolution:
@@ -84,9 +82,10 @@ def show_pokemon(request, pokemon_id):
             "title_ru": pokemon.previous_evolution.title_ru,
             "pokemon_id": pokemon.previous_evolution.id,
             "img_url": request.build_absolute_uri(pokemon.previous_evolution.image.url)
-            if pokemon.previous_evolution.image else ""
+            if pokemon.previous_evolution.image
+            else "",
         }
-    
+
     next_evolution = Pokemon.objects.filter(previous_evolution=pokemon).first()
 
     if next_evolution:
@@ -94,7 +93,8 @@ def show_pokemon(request, pokemon_id):
             "title_ru": next_evolution.title_ru,
             "pokemon_id": next_evolution.id,
             "img_url": request.build_absolute_uri(next_evolution.image.url)
-            if next_evolution.image else ""
+            if next_evolution.image
+            else "",
         }
 
     folium_map = folium.Map(location=MOSCOW_CENTER, zoom_start=12)
