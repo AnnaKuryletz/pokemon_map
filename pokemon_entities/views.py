@@ -51,7 +51,7 @@ def show_all_pokemons(request):
             {
                 "pokemon_id": pokemon.id,
                 "img_url": img_url,
-                "title_ru": pokemon.title,
+                "title_ru": pokemon.title_ru,
             }
         )
 
@@ -72,7 +72,9 @@ def show_pokemon(request, pokemon_id):
 
     pokemon_page = {
         "pokemon_id": pokemon.id,
-        "title_ru": pokemon.title,
+        "title_ru": pokemon.title_ru,
+        "title_en": pokemon.title_en,
+        "title_jp": pokemon.title_jp,
         "img_url": img_url,
         "description": pokemon.description
     }
