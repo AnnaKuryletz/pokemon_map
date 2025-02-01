@@ -15,15 +15,15 @@ class Pokemon(models.Model):
 
 class PokemonEntity(models.Model):   
     pokemon = models.ForeignKey(Pokemon, on_delete=models.CASCADE, verbose_name='покемон', related_name='entities') 
-    Lat = models.FloatField(verbose_name='Широта')  
-    Lon = models.FloatField(verbose_name='Долгота')  
-    Appeared_at = models.DateTimeField(verbose_name='Когда появился')    
-    Disappeared_at = models.DateTimeField(null=True, blank=True, verbose_name='Когда исчез')    
-    Level = models.IntegerField(null=True, blank=True, verbose_name='Уровень')  
-    Health = models.IntegerField(null=True, blank=True, verbose_name='Здоровье')  
-    Strength = models.IntegerField(null=True, blank=True, verbose_name='Атака')  
-    Defence = models.IntegerField(null=True, blank=True, verbose_name='Защита')  
-    Stamina = models.IntegerField(null=True, blank=True, verbose_name='Выносливость')  
+    lat = models.FloatField(verbose_name='Широта')  
+    lon = models.FloatField(verbose_name='Долгота')  
+    appeared_at = models.DateTimeField(verbose_name='Когда появился')    
+    lisappeared_at = models.DateTimeField(null=True, blank=True, verbose_name='Когда исчез')    
+    level = models.IntegerField(null=True, blank=True, verbose_name='Уровень')  
+    health = models.IntegerField(null=True, blank=True, verbose_name='Здоровье')  
+    strength = models.IntegerField(null=True, blank=True, verbose_name='Атака')  
+    defence = models.IntegerField(null=True, blank=True, verbose_name='Защита')  
+    stamina = models.IntegerField(null=True, blank=True, verbose_name='Выносливость')  
 
     def __str__(self):  
         return f'{self.pokemon.title_ru}'  
